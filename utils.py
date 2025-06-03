@@ -59,7 +59,7 @@ def calc_lin_char(pc_x_n2, pc_y_n2, ranges, th=0.2):
     # print(f'd={d}, ds shape ={d.shape}')
 
     flatWall_indicator = np.zeros_like(ranges.T)
-    rng_non_zero = np.clip(ranges.T, a_min=0.1, a_max=np.Inf)
+    rng_non_zero = np.clip(ranges.T, a_min=0.1, a_max=np.inf)
     flatWall_indicator[np.where(np.logical_and(np.logical_and(d/(rng_non_zero) < th, 0.01 < ranges.T), ranges.T< 4))] = 1.0
     fw_count = np.sum(flatWall_indicator-np.roll(flatWall_indicator, -1, axis=0)>0, axis=0)
     return np.sum(flatWall_indicator, axis=0), fw_count
