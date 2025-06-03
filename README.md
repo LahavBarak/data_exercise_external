@@ -19,11 +19,11 @@ LS_{i}=\{r^0,r^1,..., r^{15} \}_i
 $$
 $$
 \begin{aligned}
-Pose_i=\{x, y, \psi\}_i
+Pose_i=\{x_i, y_i, \psi_i\}
 \end{aligned}
 $$
 
-**Note:** These measurements are saved in the files named rec10.csv, rec11.csv located in this repository.
+**Note:** These measurements are saved in the files named rec_08.csv, rec_11.csv located in this repository.
 
 
 
@@ -48,7 +48,7 @@ import numpy as np
 from utils import ls2pc
 
 # load recording
-file_name = 'rec11.csv'
+file_name = 'rec_11c.csv'
 table = pd.read_table(file_name, delimiter=',')
 ranges_i = table[[f'mr18.m{i}' for i in range(16)]].to_numpy(dtype=float)*0.001  # milimeter to meter
 x_i = table['stateEstimate.x'].to_numpy()
@@ -72,18 +72,17 @@ plt.show()
 
 The BD engineers want to create a classifier. A classifier that takes as inputs 16 range measurements and decides which of the 3 classes these 16 measurements belong to. The engineers do not care what the meaning of these classes are, as long as the following criterion's are met:
 
-1. Close laser scan readings are classified to the same class with a high probability.
+1. Laser scan measurements from close locations are classified to the same class with a high probability.
+
+
 
    **Note:** This also means that cyclically shifting a measurement should not influence the classifier.
 
-   For example:
-   $$
-   \begin{aligned}
-   Class(r^0_i,r^1_i,..., r^{15}_i)==Class(r^1_i,..., r^{15}_i,r^0_i)
-   \end{aligned}
-   $$
+   For example: 
+   $Class(r^0_i,r^1_i,..., r^{15}_i)==Class(r^1_i,..., r^{15}_i,r^0_i)$
 
-2. The occurrences of each class should distribute as even as possible ($1/3, 1/3, 1/3$) over a recording. 
+
+2. The occurrences of each class should distribute as even as possible $(\frac{1}{3}, \frac{1}{3}, \frac{1}{3})$ over a recording. 
 
 3. The engineers do not want to manually label the data.
 
@@ -97,5 +96,5 @@ Here the color of the position marker (poses) represents the classification
 
 ### Objective: WIP
 
-Your job is to come up with the classifier and explain your approach. Follow the instructions in the Jupyter-Notebook.
+Your job is to come up with the classifier and explain your approach. Follow the instructions in the following [Jupyter-Notebook](./preliminary_colab.ipynb).
 
