@@ -203,5 +203,12 @@ pyrightconfig.json
 .history
 .ionide
 
+# --- Custom Ignores ---
+# Ignore the environment folder
+hw_env/
+
+# Ignore ALL VS Code settings (overrides previous exceptions)
+.vscode/
+
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,visualstudiocodebu/
 bu/*
